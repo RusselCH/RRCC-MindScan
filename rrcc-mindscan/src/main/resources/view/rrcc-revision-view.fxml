@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ejemplo.rrccmindscan.controller.RRCCRevisionController"
+            fitToWidth="true" styleClass="rrcc-pagina-scroll">
+    <VBox styleClass="rrcc-pagina">
+        <HBox styleClass="rrcc-pagina-cabecera">
+            <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                <Label text="Revisión de calidad" styleClass="rrcc-pagina-titulo"/>
+                <Label text="Encuentra contradicciones, cifras que no cuadran, fechas imposibles y errores de redacción mediante reglas, sin inteligencia artificial."
+                       styleClass="rrcc-pagina-subtitulo" wrapText="true"/>
+            </VBox>
+            <ComboBox fx:id="rrccCmbDocumento" promptText="Elige un documento" prefWidth="300.0" minWidth="200.0"/>
+            <Button text="Revisar" onAction="#rrccOnRevisar" styleClass="accent,rrcc-boton-principal" minWidth="-Infinity"/>
+            <Button fx:id="rrccBtnCorregir" text="Corregir texto" onAction="#rrccOnCorregir" styleClass="button-outlined,rrcc-boton-principal" minWidth="-Infinity"/>
+            <Button fx:id="rrccBtnExportar" text="Exportar a Excel" onAction="#rrccOnExportar" styleClass="button-outlined,rrcc-boton-principal" minWidth="-Infinity"/>
+        </HBox>
+
+        <VBox fx:id="rrccCajaVacia"/>
+
+        <VBox fx:id="rrccContenido" spacing="18.0">
+            <HBox spacing="16.0">
+                <HBox styleClass="rrcc-kpi" spacing="14.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                    <StackPane fx:id="rrccCajaAnillo"/>
+                    <VBox spacing="4.0">
+                        <Label text="Puntaje de calidad" styleClass="rrcc-kpi-titulo"/>
+                        <Label fx:id="rrccLblCalificacion" styleClass="rrcc-kpi-detalle-fuerte"/>
+                        <Label fx:id="rrccLblDetalle" styleClass="rrcc-kpi-detalle" wrapText="true"/>
+                    </VBox>
+                </HBox>
+                <VBox styleClass="rrcc-kpi,rrcc-kpi-rojo" prefWidth="170.0">
+                    <Label text="Errores" styleClass="rrcc-kpi-titulo"/>
+                    <Label fx:id="rrccLblErrores" text="0" styleClass="rrcc-kpi-valor"/>
+                    <Label text="Restan 8 puntos c/u" styleClass="rrcc-kpi-detalle"/>
+                </VBox>
+                <VBox styleClass="rrcc-kpi,rrcc-kpi-ambar" prefWidth="170.0">
+                    <Label text="Advertencias" styleClass="rrcc-kpi-titulo"/>
+                    <Label fx:id="rrccLblAdvertencias" text="0" styleClass="rrcc-kpi-valor"/>
+                    <Label text="Restan 3 puntos c/u" styleClass="rrcc-kpi-detalle"/>
+                </VBox>
+                <VBox styleClass="rrcc-kpi,rrcc-kpi-azul" prefWidth="170.0">
+                    <Label text="Sugerencias" styleClass="rrcc-kpi-titulo"/>
+                    <Label fx:id="rrccLblSugerencias" text="0" styleClass="rrcc-kpi-valor"/>
+                    <Label text="Restan 1 punto c/u" styleClass="rrcc-kpi-detalle"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="16.0">
+                <VBox styleClass="rrcc-tarjeta" HBox.hgrow="ALWAYS">
+                    <Label text="Hallazgos por tipo" styleClass="rrcc-tarjeta-titulo"/>
+                    <BarChart fx:id="rrccGraficoTipos" prefHeight="300.0" legendVisible="false" animated="false" categoryGap="6.0" barGap="0.0" VBox.vgrow="ALWAYS">
+                        <xAxis><NumberAxis label="Cantidad" minorTickVisible="false"/></xAxis>
+                        <yAxis><CategoryAxis/></yAxis>
+                    </BarChart>
+                </VBox>
+                <VBox styleClass="rrcc-tarjeta" prefWidth="380.0" minWidth="330.0">
+                    <Label text="Lista de verificación" styleClass="rrcc-tarjeta-titulo"/>
+                    <VBox fx:id="rrccCajaChecklist" spacing="6.0"/>
+                </VBox>
+            </HBox>
+
+            <VBox styleClass="rrcc-tarjeta">
+                <HBox styleClass="rrcc-barra" spacing="10.0">
+                    <Label text="Hallazgos" styleClass="rrcc-tarjeta-titulo"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Mostrar:" styleClass="rrcc-campo-label"/>
+                    <ComboBox fx:id="rrccCmbSeveridad" prefWidth="170.0"/>
+                </HBox>
+                <TableView fx:id="rrccTabla" prefHeight="300.0">
+                    <columns>
+                        <TableColumn fx:id="rrccColSeveridad" text="Severidad" prefWidth="110.0"/>
+                        <TableColumn fx:id="rrccColTipo" text="Tipo" prefWidth="170.0"/>
+                        <TableColumn fx:id="rrccColDescripcion" text="Descripción" prefWidth="420.0"/>
+                        <TableColumn fx:id="rrccColSugerencia" text="Sugerencia" prefWidth="240.0"/>
+                    </columns>
+                </TableView>
+                <VBox fx:id="rrccCajaDetalle" styleClass="rrcc-detalle-hallazgo" spacing="6.0"/>
+            </VBox>
+
+            <VBox styleClass="rrcc-tarjeta" spacing="10.0">
+                <HBox styleClass="rrcc-barra" spacing="10.0">
+                    <Label text="El documento con sus hallazgos marcados" styleClass="rrcc-tarjeta-titulo"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="error" styleClass="rrcc-chip,rrcc-sev-error"/>
+                    <Label text="advertencia" styleClass="rrcc-chip,rrcc-sev-advertencia"/>
+                    <Label text="sugerencia" styleClass="rrcc-chip,rrcc-sev-sugerencia"/>
+                </HBox>
+                <Label text="Cada problema aparece subrayado dentro del texto, como en un corrector. Pasa el mouse sobre una marca para ver la explicación y la sugerencia."
+                       styleClass="rrcc-texto-suave" wrapText="true"/>
+                <VBox fx:id="rrccCajaTextoMarcado" styleClass="rrcc-lector-hoja"/>
+            </VBox>
+        </VBox>
+    </VBox>
+</ScrollPane>

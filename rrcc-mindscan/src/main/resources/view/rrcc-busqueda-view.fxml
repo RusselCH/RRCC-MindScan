@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ejemplo.rrccmindscan.controller.RRCCBusquedaController"
+            fitToWidth="true" styleClass="rrcc-pagina-scroll">
+    <VBox styleClass="rrcc-pagina">
+        <VBox spacing="4.0" styleClass="rrcc-pagina-cabecera">
+            <Label text="Búsqueda global" styleClass="rrcc-pagina-titulo"/>
+            <Label text="Busca en el contenido de todos los documentos a la vez. Los resultados se ordenan con el algoritmo BM25, el mismo principio de los buscadores clásicos."
+                   styleClass="rrcc-pagina-subtitulo" wrapText="true"/>
+        </VBox>
+
+        <VBox styleClass="rrcc-tarjeta" spacing="12.0">
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <TextField fx:id="rrccTxtConsulta" promptText="Palabras o frase a buscar, por ejemplo: penalidad por retraso"
+                           onAction="#rrccOnBuscar" styleClass="rrcc-buscador" HBox.hgrow="ALWAYS"/>
+                <Button minWidth="-Infinity" text="Buscar" onAction="#rrccOnBuscar" styleClass="accent,rrcc-boton-principal"/>
+            </HBox>
+            <HBox spacing="18.0" alignment="CENTER_LEFT">
+                <CheckBox fx:id="rrccChkFrase" text="Frase exacta"/>
+                <CheckBox fx:id="rrccChkTolerante" text="Tolerar errores de tipeo (Levenshtein)" selected="true"/>
+                <Label text="Categoría:" styleClass="rrcc-campo-label"/>
+                <ComboBox fx:id="rrccCmbCategoria" prefWidth="190.0"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="rrccLblEstado" styleClass="rrcc-texto-suave"/>
+            </HBox>
+            <Label fx:id="rrccLblCorreccion" styleClass="rrcc-aviso" wrapText="true" visible="false" managed="false"/>
+        </VBox>
+
+        <VBox fx:id="rrccCajaResultados" spacing="12.0"/>
+    </VBox>
+</ScrollPane>

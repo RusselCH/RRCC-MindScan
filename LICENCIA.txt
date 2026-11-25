@@ -1,0 +1,15 @@
+﻿RRCC MindScan - Analizador de documentos sin inteligencia artificial
+Versión 2.0
+
+Copyright (C) 2026 Rodrigo Russel Chura Chailña. Todos los derechos reservados.
+
+Autor: Rodrigo Russel Chura Chailña
+Universidad Peruana Unión
+
+Este programa y su código fuente son obra original de su autor. Se permite instalar y usar el programa con fines académicos y personales. No se permite copiar, modificar, distribuir ni vender el programa o su código fuente, total o parcialmente, sin autorización escrita del autor.
+
+El programa se entrega "tal cual", sin garantías de ningún tipo. El autor no se responsabiliza por daños o pérdidas de información derivados de su uso. Se recomienda conservar copias de los documentos originales.
+
+RRCC MindScan funciona sin conexión a internet: los documentos que se analizan no se envían a ningún servidor.
+
+Al hacer clic en "Acepto el acuerdo" confirmas que leíste y aceptas estas condiciones.

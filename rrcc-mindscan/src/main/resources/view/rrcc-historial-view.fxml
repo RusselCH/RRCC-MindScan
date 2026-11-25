@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ejemplo.rrccmindscan.controller.RRCCHistorialController"
+      fitToWidth="true" styleClass="rrcc-pagina-scroll">
+  <VBox styleClass="rrcc-pagina">
+    <VBox spacing="4.0" styleClass="rrcc-pagina-cabecera">
+        <Label text="Historial" styleClass="rrcc-pagina-titulo"/>
+        <Label text="Registro de las revisiones de calidad y comparaciones realizadas. Doble clic en una fila para abrirla de nuevo."
+               styleClass="rrcc-pagina-subtitulo" wrapText="true"/>
+    </VBox>
+
+            <VBox styleClass="rrcc-seccion" spacing="12.0">
+                <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                    <Label text="01" styleClass="rrcc-seccion-numero"/>
+                    <Label text="Revisiones de calidad" styleClass="rrcc-seccion-titulo"/>
+                </HBox>
+                <HBox spacing="16.0">
+                    <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                        <Label text="Evolución del puntaje de calidad" styleClass="rrcc-tarjeta-titulo"/>
+                        <LineChart fx:id="rrccGraficoPuntajes" prefHeight="220.0" animated="false" createSymbols="true">
+                            <xAxis><CategoryAxis/></xAxis>
+                            <yAxis><NumberAxis lowerBound="0" upperBound="100" autoRanging="false" tickUnit="20" label="Puntaje"/></yAxis>
+                        </LineChart>
+                    </VBox>
+                </HBox>
+                <HBox styleClass="rrcc-barra" spacing="10.0">
+                    <Label fx:id="rrccLblRevisiones" styleClass="rrcc-texto-suave"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button minWidth="-Infinity" fx:id="rrccBtnEliminarRevision" text="Eliminar registro" onAction="#rrccOnEliminarRevision" styleClass="danger,button-outlined"/>
+                </HBox>
+                <TableView fx:id="rrccTablaRevisiones" prefHeight="300.0">
+                    <columns>
+                        <TableColumn fx:id="rrccColFechaRev" text="Fecha" prefWidth="140.0"/>
+                        <TableColumn fx:id="rrccColDocumentoRev" text="Documento" prefWidth="300.0"/>
+                        <TableColumn fx:id="rrccColPuntajeRev" text="Puntaje" prefWidth="90.0"/>
+                        <TableColumn fx:id="rrccColErroresRev" text="Errores" prefWidth="80.0"/>
+                        <TableColumn fx:id="rrccColAdvertenciasRev" text="Advertencias" prefWidth="100.0"/>
+                        <TableColumn fx:id="rrccColSugerenciasRev" text="Sugerencias" prefWidth="100.0"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            <VBox styleClass="rrcc-seccion" spacing="12.0">
+                <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                    <Label text="02" styleClass="rrcc-seccion-numero"/>
+                    <Label text="Comparaciones guardadas" styleClass="rrcc-seccion-titulo"/>
+                </HBox>
+                <HBox styleClass="rrcc-barra" spacing="10.0">
+                    <Label fx:id="rrccLblComparaciones" styleClass="rrcc-texto-suave"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button minWidth="-Infinity" fx:id="rrccBtnEliminarComparacion" text="Eliminar registro" onAction="#rrccOnEliminarComparacion" styleClass="danger,button-outlined"/>
+                </HBox>
+                <TableView fx:id="rrccTablaComparaciones" prefHeight="260.0">
+                    <columns>
+                        <TableColumn fx:id="rrccColFechaComp" text="Fecha" prefWidth="140.0"/>
+                        <TableColumn fx:id="rrccColDocA" text="Versión original (A)" prefWidth="240.0"/>
+                        <TableColumn fx:id="rrccColDocB" text="Versión nueva (B)" prefWidth="240.0"/>
+                        <TableColumn fx:id="rrccColSimilitud" text="Similitud" prefWidth="90.0"/>
+                        <TableColumn fx:id="rrccColCambios" text="Cambios (+ / - / ~)" prefWidth="150.0"/>
+                    </columns>
+                </TableView>
+            </VBox>
+  </VBox>
+</ScrollPane>

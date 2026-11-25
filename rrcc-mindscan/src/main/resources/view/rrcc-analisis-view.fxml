@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ejemplo.rrccmindscan.controller.RRCCAnalisisController">
+    <ScrollPane fx:id="rrccScroll" fitToWidth="true" styleClass="rrcc-pagina-scroll" HBox.hgrow="ALWAYS">
+        <VBox styleClass="rrcc-pagina">
+            <HBox styleClass="rrcc-pagina-cabecera">
+                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                    <Label text="Analizar documento" styleClass="rrcc-pagina-titulo"/>
+                    <Label fx:id="rrccLblSubtitulo" text="Resumen, palabras clave, datos y respuestas obtenidos sin leer el documento completo."
+                           styleClass="rrcc-pagina-subtitulo" wrapText="true"/>
+                </VBox>
+                <ComboBox fx:id="rrccCmbDocumento" promptText="Elige un documento" prefWidth="380.0"/>
+                <Button minWidth="-Infinity" fx:id="rrccBtnExportar" text="Exportar a Word" onAction="#rrccOnExportar" styleClass="accent,rrcc-boton-principal"/>
+            </HBox>
+    
+            <StackPane fx:id="rrccCajaCargando" visible="false" managed="false">
+                <HBox spacing="10.0" styleClass="rrcc-tarjeta,rrcc-barra">
+                    <ProgressIndicator prefWidth="22.0" prefHeight="22.0"/>
+                    <Label text="Analizando el documento..." styleClass="rrcc-texto-suave"/>
+                </HBox>
+            </StackPane>
+    
+            <VBox fx:id="rrccContenido" spacing="18.0">
+                <HBox spacing="16.0">
+                    <VBox styleClass="rrcc-kpi" HBox.hgrow="ALWAYS">
+                        <Label text="Palabras" styleClass="rrcc-kpi-titulo"/>
+                        <Label fx:id="rrccLblPalabras" text="-" styleClass="rrcc-kpi-valor"/>
+                        <Label fx:id="rrccLblDetallePalabras" styleClass="rrcc-kpi-detalle"/>
+                    </VBox>
+                    <VBox styleClass="rrcc-kpi,rrcc-kpi-azul" HBox.hgrow="ALWAYS">
+                        <Label text="Oraciones" styleClass="rrcc-kpi-titulo"/>
+                        <Label fx:id="rrccLblOraciones" text="-" styleClass="rrcc-kpi-valor"/>
+                        <Label fx:id="rrccLblDetalleOraciones" styleClass="rrcc-kpi-detalle"/>
+                    </VBox>
+                    <VBox styleClass="rrcc-kpi,rrcc-kpi-ambar" HBox.hgrow="ALWAYS">
+                        <Label text="Tiempo de lectura" styleClass="rrcc-kpi-titulo"/>
+                        <Label fx:id="rrccLblLectura" text="-" styleClass="rrcc-kpi-valor"/>
+                        <Label fx:id="rrccLblDetalleLectura" styleClass="rrcc-kpi-detalle"/>
+                    </VBox>
+                    <HBox styleClass="rrcc-kpi,rrcc-kpi-verde" spacing="12.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                        <StackPane fx:id="rrccCajaLegibilidad"/>
+                        <VBox spacing="4.0">
+                            <Label text="Legibilidad" styleClass="rrcc-kpi-titulo"/>
+                            <Label fx:id="rrccLblNivel" styleClass="rrcc-kpi-detalle-fuerte"/>
+                            <FlowPane fx:id="rrccCajaCategoria" hgap="6.0"/>
+                        </VBox>
+                    </HBox>
+                </HBox>
+    
+                <VBox fx:id="rrccSecciones" spacing="22.0">
+                    <VBox styleClass="rrcc-seccion" spacing="14.0">
+                    <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                        <Label text="01" styleClass="rrcc-seccion-numero"/>
+                        <Label text="Resumen automático" styleClass="rrcc-seccion-titulo"/>
+                    </HBox>
+                    <Label text="Las oraciones más representativas elegidas con TextRank, en el orden en que aparecen." styleClass="rrcc-seccion-descripcion" wrapText="true"/>
+                            <VBox spacing="14.0">
+                                <HBox styleClass="rrcc-barra" spacing="12.0">
+                                    <Label text="Extensión del resumen" styleClass="rrcc-campo-label"/>
+                                    <Slider fx:id="rrccSldProporcion" min="0.1" max="0.6" value="0.25" prefWidth="220.0"
+                                            majorTickUnit="0.1" minorTickCount="0" snapToTicks="false"/>
+                                    <Label fx:id="rrccLblProporcion" styleClass="rrcc-chip,rrcc-chip-suave"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <ToggleButton minWidth="-Infinity" fx:id="rrccTglTextoCompleto" text="Ver resaltado en el texto completo"
+                                                  onAction="#rrccOnCambiarVistaResumen"/>
+                                    <Button minWidth="-Infinity" text="Copiar resumen" onAction="#rrccOnCopiarResumen" styleClass="button-outlined"/>
+                                </HBox>
+                                <Label fx:id="rrccLblAhorro" styleClass="rrcc-aviso" wrapText="true"/>
+                                <VBox fx:id="rrccCajaResumen" spacing="10.0"/>
+                            </VBox>
+                    </VBox>
+                    <VBox styleClass="rrcc-seccion" spacing="14.0">
+                    <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                        <Label text="02" styleClass="rrcc-seccion-numero"/>
+                        <Label text="Preguntar al documento" styleClass="rrcc-seccion-titulo"/>
+                    </HBox>
+                    <Label text="Escribe una pregunta y MindScan devuelve las oraciones del documento que mejor la responden (BM25)." styleClass="rrcc-seccion-descripcion" wrapText="true"/>
+                            <VBox spacing="12.0">
+                                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                                    <TextField fx:id="rrccTxtPregunta" promptText="Escribe una pregunta, por ejemplo: ¿cuál es el plazo?"
+                                               onAction="#rrccOnPreguntar" HBox.hgrow="ALWAYS"/>
+                                    <Button minWidth="-Infinity" text="Buscar respuesta" onAction="#rrccOnPreguntar" styleClass="accent"/>
+                                </HBox>
+                                <FlowPane fx:id="rrccCajaSugerencias" hgap="8.0" vgap="8.0"/>
+                                <Label text="Las respuestas son oraciones del propio documento ordenadas por relevancia BM25, con prioridad a las que contienen el tipo de dato que pide la pregunta (fechas, montos, personas o lugares)."
+                                       styleClass="rrcc-texto-suave" wrapText="true"/>
+                                <VBox fx:id="rrccCajaRespuestas" spacing="10.0"/>
+                            </VBox>
+                    </VBox>
+                    <VBox styleClass="rrcc-seccion" spacing="14.0">
+                    <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                        <Label text="03" styleClass="rrcc-seccion-numero"/>
+                        <Label text="Palabras clave" styleClass="rrcc-seccion-titulo"/>
+                    </HBox>
+                    <Label text="Términos que distinguen a este documento del resto de la biblioteca (TF-IDF)." styleClass="rrcc-seccion-descripcion" wrapText="true"/>
+                            <HBox spacing="16.0">
+                                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                    <Label text="Nube de términos ponderada por TF-IDF" styleClass="rrcc-tarjeta-titulo"/>
+                                    <Label text="El tamaño indica cuánto distingue la palabra a este documento frente al resto de la biblioteca. Haz clic en una palabra para buscarla en todos los documentos."
+                                           styleClass="rrcc-texto-suave" wrapText="true"/>
+                                    <StackPane fx:id="rrccCajaNube" styleClass="rrcc-nube-caja" VBox.vgrow="ALWAYS"/>
+                                </VBox>
+                                <VBox spacing="10.0" prefWidth="430.0" minWidth="360.0">
+                                    <Label text="Términos más frecuentes" styleClass="rrcc-tarjeta-titulo"/>
+                                    <BarChart fx:id="rrccGraficoTerminos" prefHeight="380.0" legendVisible="false" animated="false" categoryGap="4.0" barGap="0.0">
+                                        <xAxis><NumberAxis label="Apariciones"/></xAxis>
+                                        <yAxis><CategoryAxis/></yAxis>
+                                    </BarChart>
+                                </VBox>
+                            </HBox>
+                    </VBox>
+                    <VBox styleClass="rrcc-seccion" spacing="14.0">
+                    <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                        <Label text="04" styleClass="rrcc-seccion-numero"/>
+                        <Label text="Datos extraídos" styleClass="rrcc-seccion-titulo"/>
+                    </HBox>
+                    <Label text="Correos, teléfonos, RUC, DNI, fechas, montos y porcentajes detectados con expresiones regulares." styleClass="rrcc-seccion-descripcion" wrapText="true"/>
+                            <VBox spacing="12.0">
+                                <HBox styleClass="rrcc-barra" spacing="10.0">
+                                    <Label text="Filtrar:" styleClass="rrcc-campo-label"/>
+                                    <FlowPane fx:id="rrccCajaTiposDato" hgap="6.0" vgap="6.0" HBox.hgrow="ALWAYS"/>
+                                    <Button minWidth="-Infinity" fx:id="rrccBtnVerDato" text="Ver en el documento" onAction="#rrccOnVerDato" styleClass="button-outlined"/>
+                                    <Button minWidth="-Infinity" fx:id="rrccBtnCopiarDato" text="Copiar valor" onAction="#rrccOnCopiarDato" styleClass="button-outlined"/>
+                                </HBox>
+                                <TableView fx:id="rrccTablaDatos" prefHeight="380.0">
+                                    <columns>
+                                        <TableColumn fx:id="rrccColTipoDato" text="Tipo" prefWidth="120.0"/>
+                                        <TableColumn fx:id="rrccColValorDato" text="Valor" prefWidth="230.0"/>
+                                        <TableColumn fx:id="rrccColVecesDato" text="Veces" prefWidth="70.0"/>
+                                        <TableColumn fx:id="rrccColContextoDato" text="Contexto donde aparece" prefWidth="520.0"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                    </VBox>
+                    <VBox styleClass="rrcc-seccion" spacing="14.0">
+                    <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                        <Label text="05" styleClass="rrcc-seccion-numero"/>
+                        <Label text="Cronología" styleClass="rrcc-seccion-titulo"/>
+                    </HBox>
+                    <Label text="Fechas del documento en orden, comparadas con el día de hoy." styleClass="rrcc-seccion-descripcion" wrapText="true"/>
+                            <VBox spacing="12.0">
+                                <HBox styleClass="rrcc-barra" spacing="10.0">
+                                    
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label fx:id="rrccLblResumenCronologia" styleClass="rrcc-chip,rrcc-chip-suave"/>
+                                </HBox>
+                                <Label text="Cada fecha se compara con el día de hoy para saber qué plazos ya vencieron y cuáles se acercan. Haz clic en un evento para verlo dentro del documento."
+                                       styleClass="rrcc-texto-suave" wrapText="true"/>
+                                <VBox fx:id="rrccCajaCronologia" spacing="0.0"/>
+                            </VBox>
+                    </VBox>
+                    <VBox styleClass="rrcc-seccion" spacing="14.0">
+                    <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                        <Label text="06" styleClass="rrcc-seccion-numero"/>
+                        <Label text="Personas y entidades" styleClass="rrcc-seccion-titulo"/>
+                    </HBox>
+                    <Label text="Personas, organizaciones y lugares mencionados." styleClass="rrcc-seccion-descripcion" wrapText="true"/>
+                            <VBox spacing="12.0">
+                                <HBox styleClass="rrcc-barra" spacing="10.0">
+                                    
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <FlowPane fx:id="rrccCajaTiposEntidad" hgap="6.0" alignment="CENTER_RIGHT"/>
+                                </HBox>
+                                <Label text="Detectado con reglas: secuencias de palabras con mayúscula, títulos (Ing., Dr., Mg.) y marcas de organización (Universidad, S.A.C., Dirección). Doble clic para ubicarlo en el texto."
+                                       styleClass="rrcc-texto-suave" wrapText="true"/>
+                                <TableView fx:id="rrccTablaEntidades" prefHeight="360.0">
+                                    <columns>
+                                        <TableColumn fx:id="rrccColTipoEntidad" text="Tipo" prefWidth="130.0"/>
+                                        <TableColumn fx:id="rrccColNombreEntidad" text="Nombre" prefWidth="300.0"/>
+                                        <TableColumn fx:id="rrccColVecesEntidad" text="Menciones" prefWidth="90.0"/>
+                                        <TableColumn fx:id="rrccColContextoEntidad" text="Primera aparición" prefWidth="440.0"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                    </VBox>
+                    <VBox styleClass="rrcc-seccion" spacing="14.0">
+                    <HBox styleClass="rrcc-seccion-cabecera" spacing="12.0" alignment="BASELINE_LEFT">
+                        <Label text="07" styleClass="rrcc-seccion-numero"/>
+                        <Label text="Estadísticas" styleClass="rrcc-seccion-titulo"/>
+                    </HBox>
+                    <Label text="Legibilidad Fernández-Huerta, longitud de las oraciones y riqueza del vocabulario." styleClass="rrcc-seccion-descripcion" wrapText="true"/>
+                            <HBox spacing="16.0">
+                                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                    <Label text="Distribución del largo de las oraciones" styleClass="rrcc-tarjeta-titulo"/>
+                                    <BarChart fx:id="rrccGraficoLargos" prefHeight="320.0" legendVisible="false" animated="false">
+                                        <xAxis><CategoryAxis label="Palabras por oración"/></xAxis>
+                                        <yAxis><NumberAxis label="Oraciones"/></yAxis>
+                                    </BarChart>
+                                    <Label fx:id="rrccLblInterpretacion" styleClass="rrcc-aviso" wrapText="true"/>
+                                </VBox>
+                                <VBox spacing="10.0" prefWidth="400.0" minWidth="340.0">
+                                    <Label text="Indicadores del texto" styleClass="rrcc-tarjeta-titulo"/>
+                                    <GridPane fx:id="rrccGridIndicadores" hgap="14.0" vgap="8.0"/>
+                                    <Label text="Escala de legibilidad" styleClass="rrcc-tarjeta-titulo"/>
+                                    <VBox fx:id="rrccCajaEscala" spacing="4.0"/>
+                                </VBox>
+                            </HBox>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+    <VBox styleClass="rrcc-indice" prefWidth="260.0" minWidth="240.0" spacing="4.0">
+        <Label text="EN ESTE INFORME" styleClass="rrcc-indice-titulo"/>
+        <VBox fx:id="rrccIndice" spacing="2.0"/>
+        <Region VBox.vgrow="ALWAYS"/>
+        <Label text="Doble clic en cualquier dato, fecha o persona para verlo dentro del documento." styleClass="rrcc-indice-nota" wrapText="true"/>
+    </VBox>
+</HBox>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ejemplo.rrccmindscan.controller.RRCCBibliotecaController"
+      styleClass="rrcc-pagina">
+    <HBox styleClass="rrcc-pagina-cabecera">
+        <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+            <Label text="Biblioteca de documentos" styleClass="rrcc-pagina-titulo"/>
+            <Label fx:id="rrccLblSubtitulo" styleClass="rrcc-pagina-subtitulo"/>
+        </VBox>
+        <Button minWidth="-Infinity" text="Importar carpeta" onAction="#rrccOnImportarCarpeta" styleClass="button-outlined,rrcc-boton-principal"/>
+        <Button minWidth="-Infinity" text="Importar archivos" onAction="#rrccOnImportarArchivos" styleClass="accent,rrcc-boton-principal"/>
+    </HBox>
+
+    <HBox styleClass="rrcc-tarjeta,rrcc-barra" spacing="10.0">
+        <TextField fx:id="rrccTxtFiltro" promptText="Filtrar por nombre..." prefWidth="300.0"/>
+        <ComboBox fx:id="rrccCmbCategoria" prefWidth="190.0"/>
+        <ComboBox fx:id="rrccCmbTipo" prefWidth="150.0"/>
+        <CheckBox fx:id="rrccChkFavoritos" text="Solo favoritos ★"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="Arrastra archivos sobre la tabla · doble clic para analizar" styleClass="rrcc-texto-suave"/>
+    </HBox>
+
+    <HBox spacing="16.0" VBox.vgrow="ALWAYS">
+        <VBox styleClass="rrcc-tarjeta" HBox.hgrow="ALWAYS">
+            <TableView fx:id="rrccTabla" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="rrccColFavorito" text="★" prefWidth="42.0"/>
+                    <TableColumn fx:id="rrccColNombre" text="Nombre" prefWidth="250.0"/>
+                    <TableColumn fx:id="rrccColTipo" text="Tipo" prefWidth="80.0"/>
+                    <TableColumn fx:id="rrccColCategoria" text="Categoría" prefWidth="130.0"/>
+                    <TableColumn fx:id="rrccColPaginas" text="Págs." prefWidth="60.0"/>
+                    <TableColumn fx:id="rrccColPalabras" text="Palabras" prefWidth="90.0"/>
+                    <TableColumn fx:id="rrccColLegibilidad" text="Legibilidad" prefWidth="100.0"/>
+                    <TableColumn fx:id="rrccColFecha" text="Importado" prefWidth="130.0"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <ScrollPane fitToWidth="true" styleClass="rrcc-pagina-scroll" prefWidth="390.0" minWidth="340.0">
+            <VBox fx:id="rrccDetalle" styleClass="rrcc-tarjeta" spacing="12.0">
+                <Label fx:id="rrccLblNombre" styleClass="rrcc-detalle-titulo" wrapText="true"/>
+                <FlowPane fx:id="rrccCajaChips" hgap="6.0" vgap="6.0"/>
+                <GridPane fx:id="rrccGridDatos" hgap="12.0" vgap="6.0"/>
+                <VBox fx:id="rrccCajaNotas" styleClass="rrcc-notas" spacing="4.0">
+                    <Label text="MIS NOTAS" styleClass="rrcc-seccion-form"/>
+                    <Label fx:id="rrccLblNotas" wrapText="true"/>
+                </VBox>
+                <Label text="VISTA PREVIA DEL TEXTO EXTRAÍDO" styleClass="rrcc-seccion-form"/>
+                <TextArea fx:id="rrccTxtVista" editable="false" wrapText="true" prefRowCount="11"/>
+                <Button minWidth="-Infinity" fx:id="rrccBtnLeer" text="Leer documento completo" onAction="#rrccOnLeer" styleClass="flat" maxWidth="Infinity"/>
+                <Label text="ACCIONES" styleClass="rrcc-seccion-form"/>
+                <HBox spacing="8.0">
+                    <Button minWidth="-Infinity" fx:id="rrccBtnAnalizar" text="Analizar" onAction="#rrccOnAnalizar" styleClass="accent" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                    <Button minWidth="-Infinity" fx:id="rrccBtnRevisar" text="Revisar calidad" onAction="#rrccOnRevisar" styleClass="button-outlined" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <HBox spacing="8.0">
+                    <Button minWidth="-Infinity" fx:id="rrccBtnComparar" text="Comparar con otro" onAction="#rrccOnComparar" styleClass="button-outlined" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                    <Button minWidth="-Infinity" fx:id="rrccBtnEditar" text="Editar datos" onAction="#rrccOnEditar" styleClass="button-outlined" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <Button minWidth="-Infinity" fx:id="rrccBtnEliminar" text="Eliminar de la biblioteca" onAction="#rrccOnEliminar" styleClass="danger,button-outlined" maxWidth="Infinity"/>
+            </VBox>
+        </ScrollPane>
+    </HBox>
+</VBox>

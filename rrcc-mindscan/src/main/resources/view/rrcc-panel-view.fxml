@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ejemplo.rrccmindscan.controller.RRCCPanelController"
+            fitToWidth="true" styleClass="rrcc-pagina-scroll">
+    <VBox styleClass="rrcc-pagina">
+        <HBox styleClass="rrcc-pagina-cabecera">
+            <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                <Label text="Panel general" styleClass="rrcc-pagina-titulo"/>
+                <Label fx:id="rrccLblSubtitulo" styleClass="rrcc-pagina-subtitulo" wrapText="true"/>
+            </VBox>
+            <Button minWidth="-Infinity" text="Importar carpeta" onAction="#rrccOnImportarCarpeta" styleClass="button-outlined,rrcc-boton-principal"/>
+            <Button minWidth="-Infinity" text="Importar archivos" onAction="#rrccOnImportarArchivos" styleClass="accent,rrcc-boton-principal"/>
+        </HBox>
+
+        <HBox spacing="16.0">
+            <VBox styleClass="rrcc-kpi" HBox.hgrow="ALWAYS">
+                <Label text="DOCUMENTOS EN LA BIBLIOTECA" styleClass="rrcc-kpi-titulo"/>
+                <Label fx:id="rrccLblDocumentos" text="0" styleClass="rrcc-kpi-valor"/>
+                <Label fx:id="rrccLblDetalleDocumentos" styleClass="rrcc-kpi-detalle"/>
+            </VBox>
+            <VBox styleClass="rrcc-kpi,rrcc-kpi-azul" HBox.hgrow="ALWAYS">
+                <Label text="TIEMPO DE LECTURA" styleClass="rrcc-kpi-titulo"/>
+                <Label fx:id="rrccLblLectura" text="-" styleClass="rrcc-kpi-valor"/>
+                <Label fx:id="rrccLblDetalleLectura" styleClass="rrcc-kpi-detalle"/>
+            </VBox>
+            <VBox styleClass="rrcc-kpi,rrcc-kpi-verde" HBox.hgrow="ALWAYS">
+                <Label text="CALIDAD PROMEDIO" styleClass="rrcc-kpi-titulo"/>
+                <Label fx:id="rrccLblCalidad" text="-" styleClass="rrcc-kpi-valor"/>
+                <Label fx:id="rrccLblDetalleCalidad" styleClass="rrcc-kpi-detalle"/>
+            </VBox>
+            <VBox styleClass="rrcc-kpi,rrcc-kpi-ambar" HBox.hgrow="ALWAYS">
+                <Label text="PRÓXIMO PLAZO" styleClass="rrcc-kpi-titulo"/>
+                <Label fx:id="rrccLblPlazo" text="-" styleClass="rrcc-kpi-valor"/>
+                <Label fx:id="rrccLblDetallePlazo" styleClass="rrcc-kpi-detalle" wrapText="true"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="16.0">
+            <VBox styleClass="rrcc-tarjeta" HBox.hgrow="ALWAYS">
+                <HBox styleClass="rrcc-barra" spacing="8.0">
+                    <Label text="Agenda de plazos de toda la biblioteca" styleClass="rrcc-tarjeta-titulo"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="rrccLblResumenAgenda" styleClass="rrcc-chip,rrcc-chip-suave"/>
+                </HBox>
+                <Label text="Fechas futuras encontradas en contratos, actas e informes, de la más cercana a la más lejana. Clic para leer el párrafo."
+                       styleClass="rrcc-texto-suave" wrapText="true"/>
+                <VBox fx:id="rrccCajaAgenda" spacing="0.0"/>
+            </VBox>
+            <VBox styleClass="rrcc-tarjeta" prefWidth="420.0" minWidth="360.0">
+                <Label text="Composición de la biblioteca" styleClass="rrcc-tarjeta-titulo"/>
+                <Label text="POR CATEGORÍA" styleClass="rrcc-seccion-form"/>
+                <VBox fx:id="rrccCajaCategorias" spacing="8.0"/>
+                <Label text="POR FORMATO" styleClass="rrcc-seccion-form"/>
+                <VBox fx:id="rrccCajaFormatos" spacing="8.0"/>
+            </VBox>
+        </HBox>
+
+        <VBox styleClass="rrcc-tarjeta">
+            <HBox styleClass="rrcc-barra" spacing="8.0">
+                <Label text="Estado de cada documento" styleClass="rrcc-tarjeta-titulo"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Qué tan fácil es de leer, qué calidad tiene y qué plazo se acerca" styleClass="rrcc-texto-suave"/>
+            </HBox>
+            <GridPane fx:id="rrccGridEstado" hgap="18.0" vgap="0.0"/>
+        </VBox>
+
+        <VBox styleClass="rrcc-tarjeta">
+            <HBox styleClass="rrcc-barra" spacing="8.0">
+                <Label text="Mapa de similitud entre documentos" styleClass="rrcc-tarjeta-titulo"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="0 %" styleClass="rrcc-texto-suave"/>
+                <Region styleClass="rrcc-leyenda-calor" prefWidth="160.0" prefHeight="12.0" maxHeight="12.0"/>
+                <Label text="100 %" styleClass="rrcc-texto-suave"/>
+            </HBox>
+            <Label fx:id="rrccLblLecturaMatriz" styleClass="rrcc-aviso" wrapText="true"/>
+            <ScrollPane fitToHeight="true" styleClass="rrcc-pagina-scroll">
+                <VBox fx:id="rrccCajaMatriz"/>
+            </ScrollPane>
+        </VBox>
+
+        <VBox fx:id="rrccZonaArrastre" styleClass="rrcc-zona-arrastre" spacing="4.0">
+            <Label text="Arrastra aquí tus archivos PDF, Word o TXT" styleClass="rrcc-zona-titulo"/>
+            <Label text="También puedes soltar una carpeta completa: MindScan extrae el texto, lo clasifica y detecta duplicados."
+                   styleClass="rrcc-texto-suave" wrapText="true"/>
+        </VBox>
+    </VBox>
+</ScrollPane>

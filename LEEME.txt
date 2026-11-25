@@ -1,0 +1,15 @@
+﻿RRCC MindScan 2.0
+
+RRCC MindScan analiza, organiza, compara y revisa documentos PDF, Word y de texto sin inteligencia artificial y sin internet.
+
+Funciones principales:
+- Resumen automático (TextRank) y preguntas al documento (BM25).
+- Palabras clave, datos extraídos, cronología y personas mencionadas.
+- Búsqueda global tolerante a errores de escritura.
+- Comparación de versiones y detección de texto copiado.
+- Revisión de calidad con puntaje de 0 a 100 y corrección automática.
+- Exportación a Word y Excel.
+
+Requisitos: Windows 10 u 11 de 64 bits, 4 GB de RAM y 300 MB libres. No necesita instalar Java: el programa ya lo incluye.
+
+Tus documentos y la base de datos se guardan en C:\Users\<usuario>\RRCCMindScan. Al desinstalar el programa esa carpeta se conserva.

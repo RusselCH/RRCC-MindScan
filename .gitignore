@@ -1,0 +1,8 @@
+RRCC-EXE/
+RRCC-INSTALADOR/
+*.zip
+*.log
+rrcc-mindscan/target/
+.idea/
+*.iml
+*.db

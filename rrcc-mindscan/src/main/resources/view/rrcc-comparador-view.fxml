@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ejemplo.rrccmindscan.controller.RRCCComparadorController"
+            fitToWidth="true" styleClass="rrcc-pagina-scroll">
+    <VBox styleClass="rrcc-pagina">
+        <VBox spacing="4.0" styleClass="rrcc-pagina-cabecera">
+            <Label text="Comparar versiones" styleClass="rrcc-pagina-titulo"/>
+            <Label text="Detecta qué oraciones se agregaron, eliminaron o modificaron entre dos documentos usando la subsecuencia común más larga (LCS), y marca palabra por palabra lo que cambió."
+                   styleClass="rrcc-pagina-subtitulo" wrapText="true"/>
+        </VBox>
+
+        <HBox styleClass="rrcc-tarjeta,rrcc-barra" spacing="12.0">
+            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                <Label text="Versión original (A)" styleClass="rrcc-campo-label"/>
+                <ComboBox fx:id="rrccCmbA" promptText="Elige el documento original" maxWidth="Infinity"/>
+            </VBox>
+            <Button minWidth="-Infinity" text="⇄" onAction="#rrccOnIntercambiar" styleClass="button-outlined,rrcc-boton-icono">
+                <tooltip><Tooltip text="Intercambiar A y B"/></tooltip>
+            </Button>
+            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                <Label text="Versión nueva (B)" styleClass="rrcc-campo-label"/>
+                <ComboBox fx:id="rrccCmbB" promptText="Elige la versión a comparar" maxWidth="Infinity"/>
+            </VBox>
+            <Button minWidth="-Infinity" text="Comparar" onAction="#rrccOnComparar" styleClass="accent,rrcc-boton-principal"/>
+        </HBox>
+
+        <VBox fx:id="rrccCajaVacia"/>
+
+        <VBox fx:id="rrccContenido" spacing="18.0">
+            <HBox spacing="16.0">
+                <HBox styleClass="rrcc-kpi" spacing="14.0" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                    <StackPane fx:id="rrccCajaAnillo"/>
+                    <VBox spacing="4.0">
+                        <Label text="Similitud global" styleClass="rrcc-kpi-titulo"/>
+                        <Label fx:id="rrccLblVeredicto" styleClass="rrcc-kpi-detalle-fuerte" wrapText="true"/>
+                        <Label fx:id="rrccLblMetricas" styleClass="rrcc-kpi-detalle" wrapText="true"/>
+                    </VBox>
+                </HBox>
+                <VBox styleClass="rrcc-kpi,rrcc-kpi-gris" prefWidth="150.0">
+                    <Label text="Sin cambios" styleClass="rrcc-kpi-titulo"/>
+                    <Label fx:id="rrccLblIguales" text="0" styleClass="rrcc-kpi-valor"/>
+                </VBox>
+                <VBox styleClass="rrcc-kpi,rrcc-kpi-verde" prefWidth="150.0">
+                    <Label text="Agregadas" styleClass="rrcc-kpi-titulo"/>
+                    <Label fx:id="rrccLblAgregadas" text="0" styleClass="rrcc-kpi-valor"/>
+                </VBox>
+                <VBox styleClass="rrcc-kpi,rrcc-kpi-rojo" prefWidth="150.0">
+                    <Label text="Eliminadas" styleClass="rrcc-kpi-titulo"/>
+                    <Label fx:id="rrccLblEliminadas" text="0" styleClass="rrcc-kpi-valor"/>
+                </VBox>
+                <VBox styleClass="rrcc-kpi,rrcc-kpi-ambar" prefWidth="150.0">
+                    <Label text="Modificadas" styleClass="rrcc-kpi-titulo"/>
+                    <Label fx:id="rrccLblModificadas" text="0" styleClass="rrcc-kpi-valor"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="16.0">
+                <VBox styleClass="rrcc-tarjeta" prefWidth="400.0" minWidth="340.0">
+                    <Label text="Composición de las oraciones" styleClass="rrcc-tarjeta-titulo"/>
+                    <PieChart fx:id="rrccGraficoComposicion" prefHeight="250.0" legendVisible="false" labelsVisible="true"/>
+                </VBox>
+                <VBox styleClass="rrcc-tarjeta" HBox.hgrow="ALWAYS" spacing="10.0">
+                    <Label text="Vocabulario que cambió" styleClass="rrcc-tarjeta-titulo"/>
+                    <Label text="Términos que aparecen solo en la versión nueva" styleClass="rrcc-seccion-form"/>
+                    <FlowPane fx:id="rrccCajaNuevos" hgap="6.0" vgap="6.0"/>
+                    <Label text="Términos que ya no aparecen" styleClass="rrcc-seccion-form"/>
+                    <FlowPane fx:id="rrccCajaRetirados" hgap="6.0" vgap="6.0"/>
+                </VBox>
+            </HBox>
+
+            <VBox styleClass="rrcc-tarjeta" spacing="10.0">
+                <HBox styleClass="rrcc-barra" spacing="10.0">
+                    <Label text="Texto idéntico compartido" styleClass="rrcc-tarjeta-titulo"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Secuencias de 6 palabras que aparecen igual en ambos documentos" styleClass="rrcc-texto-suave"/>
+                </HBox>
+                <VBox fx:id="rrccCajaCompartido" spacing="8.0"/>
+            </VBox>
+
+            <VBox styleClass="rrcc-tarjeta">
+                <HBox styleClass="rrcc-barra" spacing="10.0">
+                    <Label text="Detalle de cambios" styleClass="rrcc-tarjeta-titulo"/>
+                    <Label text="+ agregado" styleClass="rrcc-chip,rrcc-chip-agregado"/>
+                    <Label text="- eliminado" styleClass="rrcc-chip,rrcc-chip-eliminado"/>
+                    <Label text="~ modificado" styleClass="rrcc-chip,rrcc-chip-modificado"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <ToggleButton minWidth="-Infinity" fx:id="rrccTglLadoALado" text="Ver lado a lado"/>
+                    <CheckBox fx:id="rrccChkSoloCambios" text="Mostrar solo cambios" selected="true"/>
+                    <Button minWidth="-Infinity" text="Guardar en historial" onAction="#rrccOnGuardar" styleClass="button-outlined"/>
+                    <Button minWidth="-Infinity" text="Exportar a Word" onAction="#rrccOnExportar" styleClass="accent"/>
+                </HBox>
+                <VBox fx:id="rrccCajaDiff" spacing="6.0"/>
+            </VBox>
+        </VBox>
+    </VBox>
+</ScrollPane>

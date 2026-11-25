@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import atlantafx.base.controls.ModalPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:id="rrccRaiz"
+           fx:controller="com.ejemplo.rrccmindscan.controller.RRCCMainController"
+           styleClass="rrcc-app,dark"
+           prefWidth="1340.0" prefHeight="840.0">
+
+    <fx:define>
+        <ToggleGroup fx:id="rrccMenu"/>
+    </fx:define>
+
+    <BorderPane>
+        <left>
+            <VBox styleClass="rrcc-sidebar" prefWidth="250.0" minWidth="250.0">
+                <VBox styleClass="rrcc-marca" spacing="2.0">
+                    <Label text="RRCC MindScan" styleClass="rrcc-marca-titulo"/>
+                    <Label text="Analizador de documentos sin IA" styleClass="rrcc-marca-subtitulo"/>
+                </VBox>
+
+                <StackPane alignment="TOP_LEFT">
+                    <Region fx:id="rrccIndicador" styleClass="rrcc-nav-indicador"
+                            prefHeight="40.0" maxHeight="-Infinity"/>
+                    <VBox spacing="3.0">
+                        <Label text="INICIO" styleClass="rrcc-nav-seccion"/>
+                        <ToggleButton minWidth="-Infinity" fx:id="rrccNavPanel" text="Panel general" toggleGroup="$rrccMenu"
+                                      styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+                        <ToggleButton minWidth="-Infinity" fx:id="rrccNavBiblioteca" text="Biblioteca de documentos" toggleGroup="$rrccMenu"
+                                      styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+
+                        <Label text="HERRAMIENTAS" styleClass="rrcc-nav-seccion"/>
+                        <ToggleButton minWidth="-Infinity" fx:id="rrccNavAnalisis" text="Analizar documento" toggleGroup="$rrccMenu"
+                                      styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+                        <ToggleButton minWidth="-Infinity" fx:id="rrccNavBusqueda" text="Búsqueda global" toggleGroup="$rrccMenu"
+                                      styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+                        <ToggleButton minWidth="-Infinity" fx:id="rrccNavComparador" text="Comparar versiones" toggleGroup="$rrccMenu"
+                                      styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+                        <ToggleButton minWidth="-Infinity" fx:id="rrccNavRevision" text="Revisión de calidad" toggleGroup="$rrccMenu"
+                                      styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+
+                        <Label text="REGISTRO" styleClass="rrcc-nav-seccion"/>
+                        <ToggleButton minWidth="-Infinity" fx:id="rrccNavHistorial" text="Historial" toggleGroup="$rrccMenu"
+                                      styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+                    </VBox>
+                </StackPane>
+
+                <Region VBox.vgrow="ALWAYS"/>
+                <Separator/>
+                <Label fx:id="rrccLblBiblioteca" styleClass="rrcc-pie" wrapText="true"/>
+                <Button minWidth="-Infinity" fx:id="rrccBtnTema" text="Modo claro" onAction="#rrccOnCambiarTema"
+                        styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+                <Label text="Ctrl+1…7 navegar  ·  Ctrl+F buscar  ·  Ctrl+T tema" styleClass="rrcc-pie" wrapText="true"/>
+                <Label text="Versión 2.0 - RRCC" styleClass="rrcc-pie"/>
+            </VBox>
+        </left>
+
+        <center>
+            <StackPane fx:id="rrccContenido" styleClass="rrcc-contenido"/>
+        </center>
+    </BorderPane>
+
+    <ModalPane fx:id="rrccModalPanel"/>
+    <ModalPane fx:id="rrccModalDialogo"/>
+    <VBox fx:id="rrccZonaNotificaciones" styleClass="rrcc-zona-notificaciones" spacing="10.0"
+          pickOnBounds="false" alignment="BOTTOM_RIGHT" viewOrder="-100"
+          StackPane.alignment="BOTTOM_RIGHT" maxWidth="-Infinity" maxHeight="-Infinity"/>
+</StackPane>
