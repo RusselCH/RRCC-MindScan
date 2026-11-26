@@ -307,7 +307,7 @@ public class RRCCPanelController implements RRCCVista {
                     rrccCelda.getStyleClass().add("rrcc-matriz-diagonal");
                 } else {
                     double rrccAlfa = 0.08 + 0.92 * rrccS;
-                    rrccCelda.setStyle("-fx-background-color: rgba(45, 212, 191, " + String.format(java.util.Locale.ROOT, "%.2f", rrccAlfa) + ");"
+                    rrccCelda.setStyle("-fx-background-color: rgba(91, 132, 177, " + String.format(java.util.Locale.ROOT, "%.2f", rrccAlfa) + ");"
                             + (rrccS > 0.5 ? " -fx-text-fill: white;" : ""));
                     Tooltip.install(rrccCelda, new Tooltip(rrccA.getRrccNombre() + "\n" + rrccB.getRrccNombre()
                             + "\nSimilitud de vocabulario: " + Math.round(rrccS * 100) + " %\nClic para comparar"));
