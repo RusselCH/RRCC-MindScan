@@ -42,6 +42,8 @@
                                       styleClass="rrcc-nav-item" maxWidth="Infinity"/>
                         <ToggleButton minWidth="-Infinity" fx:id="rrccNavRevision" text="Revisión de calidad" toggleGroup="$rrccMenu"
                                       styleClass="rrcc-nav-item" maxWidth="Infinity"/>
+                        <ToggleButton minWidth="-Infinity" fx:id="rrccNavPdf" text="Herramientas PDF" toggleGroup="$rrccMenu"
+                                      styleClass="rrcc-nav-item" maxWidth="Infinity"/>
 
                         <Label text="REGISTRO" styleClass="rrcc-nav-seccion"/>
                         <ToggleButton minWidth="-Infinity" fx:id="rrccNavHistorial" text="Historial" toggleGroup="$rrccMenu"
@@ -54,7 +56,7 @@
                 <Label fx:id="rrccLblBiblioteca" styleClass="rrcc-pie" wrapText="true"/>
                 <Button minWidth="-Infinity" fx:id="rrccBtnTema" text="Modo claro" onAction="#rrccOnCambiarTema"
                         styleClass="rrcc-nav-item" maxWidth="Infinity"/>
-                <Label text="Ctrl+1…7 navegar  ·  Ctrl+F buscar  ·  Ctrl+T tema" styleClass="rrcc-pie" wrapText="true"/>
+                <Label text="Ctrl+1…8 navegar  ·  Ctrl+F buscar  ·  Ctrl+T tema" styleClass="rrcc-pie" wrapText="true"/>
                 <Label text="Versión 2.0 - RRCC" styleClass="rrcc-pie"/>
             </VBox>
         </left>

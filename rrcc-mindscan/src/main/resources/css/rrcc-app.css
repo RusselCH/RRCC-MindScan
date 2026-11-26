@@ -885,3 +885,23 @@
 .rrcc-app.dark .rrcc-dato-fecha { -fx-background-color: #3b2f12; -fx-text-fill: #fcd34d; }
 .rrcc-app.dark .rrcc-dato-monto { -fx-background-color: #10302d; -fx-text-fill: #5eead4; }
 .rrcc-app.dark .rrcc-dato-porcentaje { -fx-background-color: #3b1517; -fx-text-fill: #fda4af; }
+.rrcc-pdf-grupo { -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 8 0 0 0; }
+.rrcc-pdf-tarjeta { -fx-padding: 14 16; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-width: 0 0 0 4; -fx-background-color: #f4f6f8; -fx-cursor: hand; }
+.rrcc-pdf-tarjeta:hover { -fx-translate-y: -2; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 12, 0, 0, 4); }
+.rrcc-pdf-tarjeta-titulo { -fx-font-size: 14px; -fx-font-weight: bold; }
+.rrcc-pdf-tarjeta.rrcc-tono-1 { -fx-border-color: #2dd4bf; }
+.rrcc-pdf-tarjeta.rrcc-tono-2 { -fx-border-color: #34d399; }
+.rrcc-pdf-tarjeta.rrcc-tono-3 { -fx-border-color: #60a5fa; }
+.rrcc-pdf-tarjeta.rrcc-tono-4 { -fx-border-color: #a78bfa; }
+.rrcc-pdf-tarjeta.rrcc-tono-5 { -fx-border-color: #fbbf24; }
+.rrcc-pdf-tarjeta.rrcc-tono-6 { -fx-border-color: #fb7185; }
+.rrcc-pdf-tarjeta-activa { -fx-background-color: #d1fae5; }
+.rrcc-pdf-area-titulo { -fx-font-size: 20px; -fx-font-weight: bold; }
+.rrcc-pdf-zona { -fx-padding: 14; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-style: segments(6, 6); -fx-border-width: 1.5; -fx-border-color: #94a3b8; }
+.rrcc-pdf-procesar { -fx-font-size: 14px; -fx-padding: 8 28; }
+.rrcc-app.dark .rrcc-pdf-tarjeta { -fx-background-color: #171a21; }
+.rrcc-app.dark .rrcc-pdf-tarjeta:hover { -fx-background-color: #1c2028; }
+.rrcc-app.dark .rrcc-pdf-tarjeta-activa, .rrcc-app.dark .rrcc-pdf-tarjeta-activa:hover { -fx-background-color: #10302d; }
+.rrcc-app.dark .rrcc-pdf-zona { -fx-border-color: #334155; -fx-background-color: #12151b; }
+.rrcc-app.dark .rrcc-pdf-grupo { -fx-text-fill: #e2e8f0; }
+.rrcc-app.dark .rrcc-pdf-resultado { -fx-border-color: #2dd4bf; -fx-border-width: 1; -fx-border-radius: 12; }

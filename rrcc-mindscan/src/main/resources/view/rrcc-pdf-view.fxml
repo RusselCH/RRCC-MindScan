@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ejemplo.rrccmindscan.controller.RRCCPdfController"
+            fitToWidth="true" styleClass="rrcc-pagina-scroll">
+    <VBox styleClass="rrcc-pagina">
+        <VBox spacing="4.0" styleClass="rrcc-pagina-cabecera">
+            <Label text="Herramientas PDF" styleClass="rrcc-pagina-titulo"/>
+            <Label text="Une, divide, convierte, comprime, protege y edita tus PDF. Todo se hace dentro de tu computadora: tus archivos no se suben a internet."
+                   styleClass="rrcc-pagina-subtitulo" wrapText="true"/>
+        </VBox>
+
+        <VBox fx:id="rrccAreaTrabajo" styleClass="rrcc-tarjeta,rrcc-pdf-area" spacing="14.0">
+            <VBox spacing="2.0">
+                <Label fx:id="rrccLblHerramienta" styleClass="rrcc-pdf-area-titulo"/>
+                <Label fx:id="rrccLblDescripcion" styleClass="rrcc-texto-suave" wrapText="true"/>
+            </VBox>
+
+            <VBox fx:id="rrccZonaArchivos" styleClass="rrcc-pdf-zona" spacing="10.0">
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Button minWidth="-Infinity" text="Elegir archivos" onAction="#rrccOnElegirArchivos" styleClass="accent,rrcc-boton-principal"/>
+                    <Label fx:id="rrccLblArchivos" styleClass="rrcc-texto-suave" wrapText="true" HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <ListView fx:id="rrccLista" prefHeight="40.0" styleClass="rrcc-pdf-lista"/>
+                <HBox fx:id="rrccBarraOrden" spacing="8.0" alignment="CENTER_LEFT">
+                    <Button minWidth="-Infinity" text="↑ Subir" onAction="#rrccOnSubir" styleClass="button-outlined"/>
+                    <Button minWidth="-Infinity" text="↓ Bajar" onAction="#rrccOnBajar" styleClass="button-outlined"/>
+                    <Button minWidth="-Infinity" text="Quitar" onAction="#rrccOnQuitar" styleClass="button-outlined"/>
+                </HBox>
+            </VBox>
+
+            <VBox fx:id="rrccCajaOpcion" spacing="6.0">
+                <Label fx:id="rrccLblOpcion" styleClass="rrcc-campo-label"/>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <ComboBox fx:id="rrccCmbOpcion" prefWidth="230.0"/>
+                    <TextField fx:id="rrccTxtOpcion" HBox.hgrow="ALWAYS"/>
+                    <PasswordField fx:id="rrccTxtClave" promptText="Contraseña" HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <Label fx:id="rrccLblAyudaOpcion" styleClass="rrcc-texto-suave" wrapText="true"/>
+            </VBox>
+
+            <HBox alignment="CENTER_RIGHT">
+                <Button minWidth="-Infinity" fx:id="rrccBtnProcesar" text="Procesar" onAction="#rrccOnProcesar"
+                        styleClass="accent,rrcc-boton-principal,rrcc-pdf-procesar"/>
+            </HBox>
+            <VBox fx:id="rrccCajaResultado"/>
+        </VBox>
+
+        <VBox fx:id="rrccCajaGrupos" spacing="12.0"/>
+    </VBox>
+</ScrollPane>

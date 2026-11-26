@@ -220,4 +220,27 @@ class RRCCMotoresTextoTest {
         assertTrue(rrccC.rrccPorcentajeA() > 0.5);
         assertTrue(rrccComparador.rrccTextoCompartido(rrccContenido(0), rrccContenido(4)).rrccPorcentajeA() < 0.2);
     }
+
+    @Test
+    void rrccHerramientasPdfUnenDividenYProtegen() throws Exception {
+        RRCCPdfService rrccPdf = new RRCCPdfService();
+        java.io.File rrccCarpeta = java.nio.file.Files.createTempDirectory("rrcc-pdf").toFile();
+        java.io.File rrccTxt = new java.io.File(rrccCarpeta, "texto.txt");
+        java.nio.file.Files.writeString(rrccTxt.toPath(), "Línea de prueba con tildes: acción, número y ñandú.\n".repeat(120));
+        java.io.File rrccA = new java.io.File(rrccCarpeta, "a.pdf");
+        rrccPdf.rrccTextoAPdf(rrccTxt, rrccA);
+        int rrccPaginasA = rrccPdf.rrccContarPaginas(rrccA);
+        assertTrue(rrccPaginasA >= 2);
+        java.io.File rrccUnido = new java.io.File(rrccCarpeta, "unido.pdf");
+        rrccPdf.rrccUnir(java.util.List.of(rrccA, rrccA), rrccUnido);
+        assertEquals(rrccPaginasA * 2, rrccPdf.rrccContarPaginas(rrccUnido));
+        assertEquals(rrccPaginasA * 2, rrccPdf.rrccDividir(rrccUnido, "", rrccCarpeta).rrccArchivos().size());
+        assertEquals(java.util.List.of(1, 2, 3, 5), rrccPdf.rrccPaginas("1-3, 5", 6));
+        java.io.File rrccProtegido = new java.io.File(rrccCarpeta, "protegido.pdf");
+        rrccPdf.rrccProteger(rrccA, "clave123", rrccProtegido);
+        assertTrue(rrccPdf.rrccEstaProtegido(rrccProtegido));
+        java.io.File rrccLibre = new java.io.File(rrccCarpeta, "libre.pdf");
+        rrccPdf.rrccDesbloquear(rrccProtegido, "clave123", rrccLibre);
+        assertTrue(!rrccPdf.rrccEstaProtegido(rrccLibre));
+    }
 }

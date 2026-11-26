@@ -51,6 +51,7 @@ public class RRCCMainController {
     public static final String RRCC_VISTA_COMPARADOR = "rrcc-comparador-view";
     public static final String RRCC_VISTA_REVISION = "rrcc-revision-view";
     public static final String RRCC_VISTA_HISTORIAL = "rrcc-historial-view";
+    public static final String RRCC_VISTA_PDF = "rrcc-pdf-view";
 
     private final ApplicationContext rrccContexto;
     private final RRCCNotificador rrccNotificador;
@@ -69,6 +70,7 @@ public class RRCCMainController {
     @FXML private ToggleButton rrccNavComparador;
     @FXML private ToggleButton rrccNavRevision;
     @FXML private ToggleButton rrccNavHistorial;
+    @FXML private ToggleButton rrccNavPdf;
     @FXML private Region rrccIndicador;
     @FXML private Button rrccBtnTema;
     @FXML private Label rrccLblBiblioteca;
@@ -92,6 +94,7 @@ public class RRCCMainController {
         rrccNavComparador.setUserData(RRCC_VISTA_COMPARADOR);
         rrccNavRevision.setUserData(RRCC_VISTA_REVISION);
         rrccNavHistorial.setUserData(RRCC_VISTA_HISTORIAL);
+        rrccNavPdf.setUserData(RRCC_VISTA_PDF);
 
         rrccMenu.selectedToggleProperty().addListener((rrccObs, rrccAnterior, rrccActual) -> {
             if (rrccActual == null) {
@@ -191,6 +194,6 @@ public class RRCCMainController {
     }
 
     private List<ToggleButton> rrccBotonesMenu() {
-        return List.of(rrccNavPanel, rrccNavBiblioteca, rrccNavAnalisis, rrccNavBusqueda, rrccNavComparador, rrccNavRevision, rrccNavHistorial);
+        return List.of(rrccNavPanel, rrccNavBiblioteca, rrccNavAnalisis, rrccNavBusqueda, rrccNavComparador, rrccNavRevision, rrccNavPdf, rrccNavHistorial);
     }
 }
