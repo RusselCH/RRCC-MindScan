@@ -8,7 +8,7 @@ Autor: **Rodrigo Russel Chura Chailña** · Universidad Peruana Unión · 2026
 
 ## Descargar e instalar
 
-1. Ve a **[Releases](../../releases/latest)** y descarga `RRCCMindScan-Instalador-v2.0.exe`.
+1. Ve a **[Releases](https://github.com/RusselCH/RRCC-MindScan/releases/latest)** y descarga `RRCCMindScan-Instalador-v2.0.exe`.
 2. Haz doble clic y sigue el asistente: **Siguiente → Acepto el acuerdo → Siguiente → Siguiente → Instalar → Finalizar**.
 3. Abre el programa con el acceso directo **RRCC MindScan** del escritorio.
 
@@ -24,6 +24,7 @@ No necesitas instalar Java: el instalador ya lo incluye. Requisitos: Windows 10 
 | Búsqueda global | Busca en todos los documentos aunque escribas mal la palabra | BM25, Levenshtein |
 | Comparar versiones | Cambios oración por oración, vista lado a lado y texto idéntico compartido | LCS, coseno, Jaccard, n-gramas |
 | Revisión de calidad | Puntaje de 0 a 100 con 10 reglas, errores subrayados en el texto y corrección automática | Reglas, similitud coseno |
+| Herramientas PDF | Unir, dividir, extraer, eliminar, ordenar y rotar páginas; comprimir; Word, imágenes y texto a PDF; PDF a Word e imágenes; marca de agua; números de página; proteger y desbloquear | PDFBox, Apache POI |
 | Historial | Evolución del puntaje y comparaciones guardadas | — |
 
 Exporta los resultados a Word y Excel.
@@ -39,7 +40,7 @@ cd rrcc-mindscan
 
 En Visual Studio Code también puedes usar **Terminal → Run Build Task** (Ctrl+Shift+B).
 
-Pruebas automáticas (17):
+Pruebas automáticas (18):
 
 ```bat
 .\mvnw.cmd test
