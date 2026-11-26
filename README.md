@@ -4,11 +4,9 @@
 
 Autor: **Rodrigo Russel Chura Chailña** · Universidad Peruana Unión · 2026
 
-![Panel general](Documentacion/panel.png)
-
 ## Descargar e instalar
 
-1. Ve a **[Releases](https://github.com/RusselCH/RRCC-MindScan/releases/latest)** y descarga `RRCCMindScan-Instalador-v2.0.exe`.
+1. Descarga el instalador **[RRCCMindScan-Instalador-v2.0.exe](RRCC-INSTALADOR/RRCCMindScan-Instalador-v2.0.exe)** (carpeta `RRCC-INSTALADOR`, botón *Download raw file*).
 2. Haz doble clic y sigue el asistente: **Siguiente → Acepto el acuerdo → Siguiente → Siguiente → Instalar → Finalizar**.
 3. Abre el programa con el acceso directo **RRCC MindScan** del escritorio.
 
@@ -67,7 +65,7 @@ RRCC-MindScan/
 │       ├── service/                algoritmos de texto
 │       ├── controller/             pantallas
 │       └── ui/                     componentes visuales
-├── Documentacion/                 código fuente, manual de uso y para ejecutar
+├── RRCC-INSTALADOR/               instalador RRCCMindScan-Instalador-v2.0.exe
 ├── RRCC-GENERAR-EXE.bat
 ├── RRCC-GENERAR-INSTALADOR.bat
 ├── RRCC-INSTALADOR.iss
